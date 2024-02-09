@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication1.Models.UserProfile>
+
+@{
+    ViewBag.Title = "User Profiles";
+    Layout = "~/Views/Shared/_Pages.cshtml";
+}
+
+<div class="container bootdey">
+    <div class="col-md-12 justify-content-center">
+        <div class="portlet-title tabbable-line">
+            <div class="caption caption-md">
+                <i class="icon-globe theme-font hide"></i>
+                <span class="caption-subject font-blue-madison bold uppercase"></span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <p>
+                <a class="btn btn-primary btn-sm" asp-action="Create">Add</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Shared Users</th>
+                        <th>RateLimit</th>
+                        <th>SessionTimeout</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.SharedUsers</td>
+                            <td>@item.RateLimit</td>
+                            <td>@item.SessionTimeout</td>
+                            <td>
+                                @*
+                            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", "UserProfile", new { name = item.Name })">Edit</a>
+
+                                *@
+                                <form asp-action="RemoveOnMikrotik" method="post">
+                                    <input type="hidden" name="name" value="@item.Name" />
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this user profile?')">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+        </div>
+    </div>
+</div>

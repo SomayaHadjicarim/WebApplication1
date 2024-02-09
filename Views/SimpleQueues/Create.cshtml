@@ -1,0 +1,49 @@
+﻿@model WebApplication1.Models.SimpleQueue
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Simple Queue</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateOnMikrotik">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label" ></label>
+                <input asp-for="Name" class="form-control" placeholder="Name of Queue"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Target" class="control-label"></label>
+                <input asp-for="Target" class="form-control" placeholder="e.g. 192.168.90.0/24"/>
+                <span asp-validation-for="Target" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadMaxLimit" class="control-label"></label>
+                <input asp-for="UploadMaxLimit" class="form-control" placeholder="Upload Max Limit" />
+                <span asp-validation-for="UploadMaxLimit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DownloadMaxLimit" class="control-label"></label>
+                <input asp-for="DownloadMaxLimit" class="form-control" placeholder="Download Max Limit" />
+                <span asp-validation-for="DownloadMaxLimit" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

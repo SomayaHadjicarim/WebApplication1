@@ -1,0 +1,29 @@
+﻿@model List<Active>
+@{
+    ViewData["Title"] = "Active";
+    Layout = "~/Views/Shared/_Pages.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Server</th>
+            <th>IPAddress</th>
+            <th>MacAddress</th>
+            <th>SessionTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var activeUser in Model)
+        {
+            <tr>
+                <td>@activeUser.User</td>
+                <td>@activeUser.Server</td>
+                <td>@activeUser.IPAddress</td>
+                <td>@activeUser.MacAddress</td>
+                <td>@activeUser.SessionTime</td>
+            </tr>
+        }
+    </tbody>
+</table>

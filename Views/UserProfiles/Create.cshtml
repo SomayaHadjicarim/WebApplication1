@@ -1,0 +1,61 @@
+﻿@model WebApplication1.Models.UserProfile
+
+@{
+    ViewBag.Title = "Create User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Optional layout page
+}
+
+<div class="container mt-4">
+    <h4>New User Profile</h4>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <form asp-action="CreateOnMikrotik" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="sharedUsers">Shared Users:</label>
+            <input type="text" id="sharedUsers" name="sharedUsers" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="rateLimit">Rate Limit:</label>
+            <div class="input-group">
+                <input id="rateLimit" name="rateLimit" class="form-control" required />
+                <div class="input-group-append">
+                    <select class="form-control" id="rateLimitUnit">
+                        <option value="KB">KB</option>
+                        <option value="MB">MB</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sessionTimeout">Session Timeout:</label>
+            <div class="input-group">
+                <input id="sessionTimeout" name="sessionTimeout" class="form-control" required />
+                <div class="input-group-append">
+                    <select class="form-control" id="sessionTimeoutUnit">
+                        <option value="days">Days</option>
+                        <option value="hours">Hours</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button id="applyButton" type="submit" class="btn btn-primary">Apply</button>
+            <a asp-action="Index">Back to list</a>
+        </div>
+       </form>
+</div>
+<script>
+    document.getElementById("applyButton").addEventListener("click", function () {
+        window.location.href = "Index", "UserProfile";
+    });
+</script>

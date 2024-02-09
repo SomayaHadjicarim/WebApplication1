@@ -1,0 +1,26 @@
+﻿@model WebApplication1.Models.UserProfile
+
+@{
+    ViewBag.Title = "Remove User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Delete</h2>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <form asp-action="RemoveOnMikrotik" method="post">
+        <div class="form-group">
+            <label for="name">Delete:</label>
+            <input type="text" id="name" name="name" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-danger">Delete </button>
+    </form>
+</div>

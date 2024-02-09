@@ -1,0 +1,116 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+:root {
+    --light: #f0eff5; /* rgb(240, 239, 245) */
+    --light-dark: #ded7d7; /* rgb(222, 215, 215) */
+    --gray-light: #86848c; /* rgb(134, 132, 140) */
+    --gray-dark: #56555e; /* rgb(86, 85, 94) */
+    --dark: #27282f; /* rgb(39, 40, 47) */
+    --msu-blue: rgb(46, 49, 146); /* 2e3192 */
+    --msu-red: rgb(149, 32, 49); /* 952031 */
+    --msu-yellow: rgb(216, 173, 19); /* d8ad13 */
+    --msu-green: rgb(4, 115, 60); /* 04733c */
+
+    --shadows: 0px 0px 15px -5px rgba(0, 0, 0, 0.3);
+    --glow: 0px 0px 15px -5px rgba(255, 255, 255, 0.8);
+    --hover-shade: 0px 0px 15px -5px rgba(46, 49, 146, 0.8);
+    --border-white: 1px solid rgb(255,255,255);
+    --border-dark: 1px solid rgb(39, 40, 47);
+}
+header {
+    position: fixed;
+    background-color: skyblue;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.sidemain {
+    display: flex;
+}
+
+.main-content {
+    flex: 10;
+}
+
+.testbg {
+    background-image: url("pics/BackgroundHD.png");
+}
+.sidebar {
+    flex: 2;
+    height: 100vh;
+    margin-right: 10px;
+    position: sticky;
+    top: 0;
+}
+
+a {
+  color: #0077cc;
+  width: 100%;
+}
+a.active {
+    background: var(--light);
+    color: var(--dark);
+    font-weight: 700;
+    }
+
+a:hover {
+    color: white;
+    margin-left: 0.5rem;
+    }
+
+a.active:hover {
+    color: var(--dark);
+    }
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.top {
+    border-bottom: 2px solid rgba(39, 40, 47, .2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titleName {
+    margin-left: 30px;
+    font-weight: 700;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

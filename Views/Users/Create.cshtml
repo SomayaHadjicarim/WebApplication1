@@ -1,0 +1,40 @@
+﻿@model WebApplication1.Models.User
+
+<form asp-action="CreateOnMikrotik" method="post">
+    <div class="form-group">
+        <div class="form-group">
+            <label for="Server">Server:</label>
+            <input type="text" id="Server" name="Server" class="form-control" required />
+        </div>
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Name" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Password">Password:</label>
+        <input type="password" id="Password" name="Password" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Profile">Profile:</label>
+        <select id="Profile" name="Profile" class="form-control" required >
+        <option value=" "> profile</option>
+            @foreach (var userProfile in ViewBag.UserProfiles)
+            {
+                <option value="@userProfile.Name"></option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="LimitUptime">Uptime:</label>
+        <input type="text" id="LimitUptime" name="LimitUptime" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Apply</button>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}

@@ -1,0 +1,53 @@
+﻿@model List<WebApplication1.Models.User>
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_Pages.cshtml";
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<p>
+    <a class="btn btn-primary btn-sm" asp-action="Create">Add</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Server</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Profile</th>
+            <th>Limit Uptime</th>
+            <th>Uptime</th>
+            <th>Bytes In</th>
+            <th>Bytes Out</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Server</td>
+                <td>@user.Name</td>
+                <td>@user.Password</td>
+                <td>@user.Profile</td>
+                <td>@user.LimitUptime</td>
+                <td>@user.Uptime</td>
+                <td>@user.BytesIn</td>
+                <td>@user.BytesOut</td>
+                <td>
+                    <form asp-action="DeleteOnMikrotik" method="post">
+                        <input type="hidden" name="name" value="@user.Name" />
+                        <button type="submit"  onclick="return confirm('Are you sure you want to remove this user?')">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

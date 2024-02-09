@@ -1,0 +1,137 @@
+﻿@model IEnumerable<WebApplication1.Models.SimpleQueue>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Pages.cshtml";
+}
+
+
+<div class="container bootdey">
+
+    <div class="col-md-12 justify-content-center">
+        <div >
+            <div>
+                <div class="portlet-title tabbable-line">
+                    <div class="caption caption-md">
+                        <i class="icon-globe theme-font hide"></i>
+                        <span class="caption-subject font-blue-madison bold uppercase"></span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+                    <p>
+                        <a class="btn btn-danger" asp-action="Create">Add</a>
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Target</th>
+                                <th>Upload Max Limit</th>
+                                <th>Download Max Limit</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Target)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UploadMaxLimit)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DownloadMaxLimit)</td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="openEditModal('@item.Name', '@item.UploadMaxLimit', '@item.DownloadMaxLimit')">Edit</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Simple Queue</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/SimpleQueues/EditOnMikrotik" method="post">
+                    <div class="form-group">
+                        <label for="editModalName">Name:</label>
+                        <input type="text" id="editModalName" name="name" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="editModalUploadMaxLimit">Upload Max Limit:</label>
+                        <input type="text" id="editModalUploadMaxLimit" name="uploadMaxLimit" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="editModalDownloadMaxLimit">Download Max Limit:</label>
+                        <input type="text" id="editModalDownloadMaxLimit" name="downloadMaxLimit" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="confirmRemoveModal" tabindex="-1" role="dialog" aria-labelledby="confirmRemoveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmRemoveModalLabel">Confirm Removal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmRemoveText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="removeConfirmed()">OK</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openEditModal(name, uploadMaxLimit, downloadMaxLimit) {
+            // Set the values in the modal form
+            $('#editModalName').val(name);
+            $('#editModalUploadMaxLimit').val(uploadMaxLimit);
+            $('#editModalDownloadMaxLimit').val(downloadMaxLimit);
+            // Open the modal
+            $('#editModal').modal('show');
+        }
+        function openRemoveModal(name) {
+            $('#confirmRemoveText').text('Are you sure you want to remove the Simple Queue with name: ' + name + '?');
+            // Open the confirm modal
+            $('#confirmRemoveModal').modal('show');
+        }
+
+        function removeConfirmed() {
+            var nameToRemove = $('#confirmRemoveText').text().split(':')[1].trim();
+            // Redirect to RemoveOnMikrotik controller or handle removal logic here
+            window.location.href = '/SimpleQueues/RemoveOnMikrotik' + nameToRemove;
+
+            //add this to the button in the <tbody>
+            //<button class="btn btn-danger" onclick = "openRemoveModal('item.Name')" > Remove < /button>
+        }
+    </script>
+}
+
+
+
